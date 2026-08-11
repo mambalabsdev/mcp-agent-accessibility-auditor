@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mamba-agent-accessibility-auditor": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mambalabsdev/mcp-agent-accessibility-auditor"
+      ],
+      "env": {
+        "APIFY_TOKEN": "your-apify-token"
+      }
+    }
+  }
+}
