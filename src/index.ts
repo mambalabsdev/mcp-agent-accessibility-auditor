@@ -137,8 +137,9 @@ server.registerTool(
     },
     inputSchema: {
     domain: z.string().describe("One company domain, for example vercel.com. Protocol and path are stripped."),
-    check_endpoints: z.boolean().optional().describe("Probes sitemap, OpenAPI, well known files and feeds. Adds 7 concurrent requests. Default: true."),
-    check_structured_data: z.boolean().optional().describe("Parses JSON-LD, microdata, Open Graph and canonical off the homepage. Costs no extra requests. Default: true."),
+    checks: z.array(z.enum(["llms_txt", "robots_ai", "sitemap", "openapi", "security_txt", "feeds", "json_ld", "microdata", "open_graph", "canonical", "render_mode"])).optional().describe("Run only these checks. Omit for all of them. Narrowing narrows the work as well as the answer: an llms_txt only audit makes three requests instead of ten. A check you did not run reports null, never false. The score is rescaled over the checks you selected, so a site with a perfect llms.txt audited for llms.txt alone reads 100 rather than 25."),
+    check_endpoints: z.boolean().optional().describe("Alias for the checks array: false removes sitemap, openapi, security_txt and feeds. Ignored when checks is set. Default: true."),
+    check_structured_data: z.boolean().optional().describe("Alias for the checks array: false removes json_ld, microdata, open_graph and canonical. Ignored when checks is set. Default: true."),
     skipCache: z.enum(["false", "true"]).optional().describe("Leave as false to use the 7 day cache. Set to true to re-audit the domain from scratch. Default: \"false\"."),
     },
   },

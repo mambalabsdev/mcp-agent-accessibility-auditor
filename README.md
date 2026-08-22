@@ -37,8 +37,9 @@ Domain in, whether an AI agent can read that site out.
 | Input | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `domain` | string | yes | One company domain, for example vercel.com. Protocol and path are stripped. |
-| `check_endpoints` | boolean | no | Probes sitemap, OpenAPI, well known files and feeds. Adds 7 concurrent requests. Default `true`. |
-| `check_structured_data` | boolean | no | Parses JSON-LD, microdata, Open Graph and canonical off the homepage. Costs no extra requests. Default `true`. |
+| `checks` | array | no | Run only these checks: `llms_txt`, `robots_ai`, `sitemap`, `openapi`, `security_txt`, `feeds`, `json_ld`, `microdata`, `open_graph`, `canonical`, `render_mode`. Omit for all of them. A check you did not run reports `null`, never `false`, and the score is rescaled over what you selected. |
+| `check_endpoints` | boolean | no | Alias for the checks array: false removes `sitemap`, `openapi`, `security_txt` and `feeds`. Ignored when `checks` is set. Default `true`. |
+| `check_structured_data` | boolean | no | Alias for the checks array: false removes `json_ld`, `microdata`, `open_graph` and `canonical`. Ignored when `checks` is set. Default `true`. |
 | `skipCache` | enum | no | Leave as `false` to use the 7 day cache. Set to `true` to re-audit the domain from scratch. Default `false`. |
 
 ## Reading the output
