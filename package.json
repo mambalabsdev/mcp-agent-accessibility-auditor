@@ -1,7 +1,7 @@
 {
   "name": "@mambalabsdev/mcp-agent-accessibility-auditor",
   "displayName": "Agent Accessibility Auditor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MCP server for the Mamba Labs Agent Accessibility Auditor actor on Apify. Domain in, whether an AI agent can read that site out: llms.txt, robots AI crawler rules, structured data and endpoints.",
   "type": "module",
   "bin": {

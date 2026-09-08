@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "mcp-agent-accessibility-auditor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MCP server for the Mamba Labs Agent Accessibility Auditor actor on Apify. Domain in, whether an AI agent can read that site out: llms.txt, robots AI crawler rules, structured data and endpoints.",
   "author": {
     "name": "Mamba Labs"
