@@ -36,7 +36,7 @@ Domain in, whether an AI agent can read that site out.
 
 | Input | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `domain` | string | yes | One company domain, for example vercel.com. Protocol and path are stripped. |
+| `domain` | string | yes | One company domain, for example vercel.com. A full URL is accepted: the protocol and path are stripped. One domain per call. |
 | `checks` | array | no | Run only these checks: `llms_txt`, `robots_ai`, `sitemap`, `openapi`, `security_txt`, `feeds`, `json_ld`, `microdata`, `open_graph`, `canonical`, `render_mode`. Omit for all of them. A check you did not run reports `null`, never `false`, and the score is rescaled over what you selected. |
 | `check_endpoints` | boolean | no | Alias for the checks array: false removes `sitemap`, `openapi`, `security_txt` and `feeds`. Ignored when `checks` is set. Default `true`. |
 | `check_structured_data` | boolean | no | Alias for the checks array: false removes `json_ld`, `microdata`, `open_graph` and `canonical`. Ignored when `checks` is set. Default `true`. |
@@ -59,6 +59,8 @@ Pricing is on the [actor's Apify page](https://apify.com/mambalabs/agent-accessi
 ## What this server does and does not do
 
 It is a thin client for the Apify actor. It passes your input through and returns the actor's output unchanged. Every behavior described above lives in the actor, not here.
+
+The tool starts the actor run and polls it to a finished status, so a long run is not cut off at 300 seconds. If the run is still going after 30 minutes, the call stops waiting and returns the run ID with a link to it in the Apify Console, where the results land when it finishes. A run that does not succeed comes back as an error with its run ID and status.
 
 Errors are surfaced, never swallowed. An invalid input, an invalid token, an exhausted balance, a timeout, or a run that returns anything other than a dataset all come back as an explicit tool error rather than as an empty result.
 
