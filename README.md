@@ -60,7 +60,7 @@ Pricing is on the [actor's Apify page](https://apify.com/mambalabs/agent-accessi
 
 It is a thin client for the Apify actor. It passes your input through and returns the actor's output unchanged. Every behavior described above lives in the actor, not here.
 
-The tool starts the actor run and polls it to a finished status, so a long run is not cut off at 300 seconds. If the run is still going after 30 minutes, the call stops waiting and returns the run ID with a link to it in the Apify Console, where the results land when it finishes. A run that does not succeed comes back as an error with its run ID and status.
+The tool starts the actor run and polls it to a finished status, so a long run is not cut off at 300 seconds. The run is allowed 1,800 seconds. If it is still going two minutes after that, the call stops waiting and returns the run ID with a link to it in the Apify Console, where the results land when it finishes. A run that does not succeed comes back as an error with its run ID and status.
 
 Errors are surfaced, never swallowed. An invalid input, an invalid token, an exhausted balance, a timeout, or a run that returns anything other than a dataset all come back as an explicit tool error rather than as an empty result.
 
