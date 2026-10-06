@@ -19,7 +19,7 @@ const ACTOR_INPUTS = ["check_endpoints","check_structured_data","checks","domain
 const TOOL_INPUTS = ["check_endpoints","check_structured_data","checks","domain","skipCache"];
 const TOOL_REQUIRED = ["domain"];
 const SAMPLE_ARGS = {"domain":"vercel.com"};
-const RUN_QUERY = "";
+const RUN_QUERY = "?timeout=1800";
 
 // Speak MCP over stdio to the built server. extraEnv and preload let a test
 // swap in the fake Apify API from helpers/mock-fetch.mjs.
