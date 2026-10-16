@@ -14,9 +14,9 @@ const TOOL_NAME = "audit_agent_accessibility";
 const ACTOR_ID = "anxbRv0lKrpQ1pnua";
 // Every input the live actor exposes to a buyer must be exposed by the tool.
 // Excluded by rule: source_tag (internal or test only fields).
-const ACTOR_INPUTS = ["check_endpoints","check_structured_data","checks","domain","skipCache"];
+const ACTOR_INPUTS = ["max_charge_usd","check_endpoints","check_structured_data","checks","domain","skipCache"];
 // The tool's full input list, so a dropped or renamed parameter fails here.
-const TOOL_INPUTS = ["check_endpoints","check_structured_data","checks","domain","skipCache"];
+const TOOL_INPUTS = ["max_charge_usd","check_endpoints","check_structured_data","checks","domain","skipCache"];
 const TOOL_REQUIRED = ["domain"];
 const SAMPLE_ARGS = {"domain":"vercel.com"};
 const RUN_QUERY = "?timeout=1800";
