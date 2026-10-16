@@ -200,15 +200,16 @@ server.registerTool(
   {
     title: "Audit Agent Accessibility",
     description:
-      "Checks whether an AI agent can read one website. Returns one flat row of 42 fields across five families: llms.txt (with llms-full.txt and ai.txt), robots.txt AI crawler policy including Content Signal directives, structured data (JSON-LD, microdata, Open Graph, canonical), render mode, and machine readable endpoints (sitemap, OpenAPI, well known files, feeds). Every field is read off a fetch and no model is called, so a repeat audit changes only when the site changes. Twelve requests per domain, typically 2 to 4 seconds. Use it to audit a site before and after AI crawler work, one domain per call. Do not use it to find which AI vendors a company pays for (that is the AI Tooling Detector) or to read page content. Requires an APIFY_TOKEN and consumes Apify credits: charged per domain analyzed plus a small run start fee. Read only.",
+      "Checks whether an AI agent can read one website. Returns one flat row of 42 fields across five families: llms.txt (with llms-full.txt and ai.txt), robots.txt AI crawler policy including Content Signal directives, structured data (JSON-LD, microdata, Open Graph, canonical), render mode, and machine readable endpoints (sitemap, OpenAPI, well known files, feeds). Every field is read off a fetch and no model is called, so a repeat audit changes only when the site changes. Twelve requests per domain, typically 2 to 4 seconds. Use it to audit a site before and after AI crawler work, one domain per call. Do not use it to find which AI vendors a company pays for (that is the AI Tooling Detector) or to read page content. Requires an APIFY_TOKEN and consumes Apify credits: charged per domain analyzed plus a small run start fee. Reads public data only and writes nothing.",
     annotations: {
       title: "Audit Agent Accessibility",
-      readOnlyHint: true,
+      readOnlyHint: false,
       destructiveHint: false,
       idempotentHint: true,
       openWorldHint: true,
     },
     inputSchema: {
+    max_charge_usd: z.number().min(0).optional().describe("Optional. The run stops before starting an item that could take its charges past this amount, so no row is cut in half. Leave empty to rely only on the maximum cost per run you set in Apify. The run also stops cleanly when that Apify maximum is reached."),
     domain: z.string().describe("One company domain, for example vercel.com. A full URL is accepted: the protocol and path are stripped and the root of the domain is audited. One domain per call."),
     checks: z.array(z.enum(["llms_txt", "robots_ai", "sitemap", "openapi", "security_txt", "feeds", "json_ld", "microdata", "open_graph", "canonical", "render_mode"])).optional().describe("Run only these checks. Omit for all of them. Narrowing narrows the work as well as the answer: an llms_txt only audit makes three requests instead of ten. A check you did not run reports null, never false. The score is rescaled over the checks you selected, so a site with a perfect llms.txt audited for llms.txt alone reads 100 rather than 25."),
     check_endpoints: z.boolean().optional().describe("Alias for the checks array: false removes sitemap, openapi, security_txt and feeds. Ignored when checks is set. Default: true."),

@@ -41,6 +41,7 @@ Domain in, whether an AI agent can read that site out.
 | `check_endpoints` | boolean | no | Alias for the checks array: false removes `sitemap`, `openapi`, `security_txt` and `feeds`. Ignored when `checks` is set. Default `true`. |
 | `check_structured_data` | boolean | no | Alias for the checks array: false removes `json_ld`, `microdata`, `open_graph` and `canonical`. Ignored when `checks` is set. Default `true`. |
 | `skipCache` | enum | no | Leave as `false` to use the 7 day cache. Set to `true` to re-audit the domain from scratch. Default `false`. |
+| `max_charge_usd` | number | no | Optional cost cap in USD for this run. The actor stops before an item that could take its charges past this amount. Omit to rely on the maximum cost per run set in Apify. |
 
 ## Reading the output
 
@@ -53,6 +54,13 @@ Built for a technical SEO or growth engineer preparing a site for AI crawlers an
 ## Billing
 
 You are charged per domain analyzed, plus a small actor start fee. A repeat run inside the 7 day cache window costs nothing new.
+
+Price per event on the Apify FREE plan, from the live pricing record; paid Apify plans pay less per event.
+
+| Event | Price (USD) |
+| --- | --- |
+| Domain analyzed (`domain-analyzed`) | 0.005 |
+| Actor Start (`apify-actor-start`) | 0.00005 |
 
 Pricing is on the [actor's Apify page](https://apify.com/mambalabs/agent-accessibility-auditor). Running this server consumes Apify credits.
 
